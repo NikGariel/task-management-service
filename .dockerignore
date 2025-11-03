@@ -1,4 +1,6 @@
 node_modules
+.git
+.gitignore
 .env
 .env.local
 *.log
@@ -8,4 +10,7 @@ dist
 .DS_Store
 .vscode
 .idea
-*.buildinfo
+tests
+README.md
+docker-compose.yml
+Dockerfile

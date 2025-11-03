@@ -2,14 +2,40 @@
   "name": "app",
   "version": "1.0.50",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir ./dist --target bun --minify",
+    "build:check": "bun build src/index.ts --outdir ./dist --target bun --minify --no-bundle",
+    "start:prod": "NODE_ENV=production bun dist/index.js",
+    "prebuild": "bun run db:generate",
+    "postbuild": "echo '✅ Build completed successfully'",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "test:coverage": "bun test --coverage",
+    "stress": "bun run tests/stress/load-test.ts",
+    "stress:light": "bun run tests/stress/load-test.ts --light",
+    "stress:medium": "bun run tests/stress/load-test.ts --medium",
+    "stress:heavy": "bun run tests/stress/load-test.ts --heavy",
+    "stress:autocannon": "bun run tests/stress/autocannon-test.ts",
+    "db:migrate": "bun run src/infrastructure/database/migrate.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:push": "drizzle-kit push",
+    "db:pull": "drizzle-kit pull",
+    "db:studio": "drizzle-kit studio",
+    "db:check": "drizzle-kit check"
   },
   "dependencies": {
-    "elysia": "latest"
+    "elysia": "latest",
+    "@elysiajs/swagger": "latest",
+    "drizzle-orm": "latest",
+    "postgres": "latest",
+    "ioredis": "latest",
+    "zod": "latest"
   },
   "devDependencies": {
-    "bun-types": "latest"
+    "bun-types": "latest",
+    "drizzle-kit": "latest",
+    "autocannon": "latest"
   },
   "module": "src/index.js"
 }
